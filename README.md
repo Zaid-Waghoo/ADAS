@@ -24,3 +24,7 @@ Make sure you have the following installed:
 ```bash
 git clone https://github.com/your-username/adas-project.git
 cd adas-project
+
+pip install -r requirements.txt
+
+python SteeringTrajectory.py
