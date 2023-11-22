@@ -108,9 +108,9 @@ def visualize_trajectories(video_path, camera_matrix, dist, image_points, image_
         image = cv2.resize(image, (960, 540))
 
         # Undistort the image
-        # h, w = image.shape[:2]
-        # newcameramtx, roi = cv2.getOptimalNewCameraMatrix(camera_matrix, dist, (w, h), 1, (w, h))
-        # image = cv2.undistort(image, camera_matrix, dist, None)
+        h, w = image.shape[:2]
+        newcameramtx, roi = cv2.getOptimalNewCameraMatrix(camera_matrix, dist, (w, h), 1, (w, h))
+        image = cv2.undistort(image, camera_matrix, dist, None)
 
         # Draw trajectories on the image
         for pt in image_points.reshape(-1, 2).astype(int):
@@ -131,6 +131,64 @@ def visualize_trajectories(video_path, camera_matrix, dist, image_points, image_
         # Break the loop when 'q' key is pressed
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+
+    # Release the video capture object and close all windows
+    cap.release()
+    cv2.destroyAllWindows()
+
+# Function to visualize trajectories in real-time
+def visualize_trajectories_real_time(video_path, camera_matrix, dist, image_points, image_points_inner_rear_wheel, image_points_outer_rear_wheel, steering_angle_array):
+
+    # Create a video capture object
+    cap = cv2.VideoCapture(video_path)
+
+    while True:
+        # Read a single frame from the video
+        ret, image = cap.read()
+
+        if not ret:
+            break
+
+        # Resize the frame to 960x540
+        image = cv2.resize(image, (960, 540))
+
+        frame = image.copy()
+
+        # Undistort the image
+        h, w = image.shape[:2]
+        newcameramtx, roi = cv2.getOptimalNewCameraMatrix(camera_matrix, dist, (w, h), 1, (w, h))
+        image = cv2.undistort(image, camera_matrix, dist, None)
+        
+        for steering_angle in steering_angle_array:
+
+            # Calculate wheel angles
+            ackermann_angle = compute_ackermann_angle(wheelbase, steering_angle, steering_ratio)
+
+            # Calculate trajectories
+            trajectory_center, trajectory_inner_rear_wheel, trajectory_outer_rear_wheel = compute_ackermann_trajectory(wheelbase, ackermann_angle, speed, time_step, total_time)
+
+            trajectory_points_3d, trajectory_inner_rear_wheel_3d, trajectory_outer_rear_wheel_3d = convert_points_to_3d(trajectory_center, trajectory_inner_rear_wheel, trajectory_outer_rear_wheel)
+
+            image_points, image_points_inner_rear_wheel, image_points_outer_rear_wheel = project_3d_to_2d(trajectory_points_3d, trajectory_inner_rear_wheel_3d, trajectory_outer_rear_wheel_3d, rotation_vector, translation_vector, camera_matrix, dist)
+
+            # Draw trajectories on the image
+            for pt in image_points.reshape(-1, 2).astype(int):
+                pt_shifted = tuple(pt)
+                cv2.circle(frame, pt_shifted, 2, (255, 0, 0), -1)
+
+            for pt in image_points_inner_rear_wheel.reshape(-1, 2).astype(int):
+                pt_shifted = tuple(pt)
+                cv2.circle(frame, pt_shifted, 2, (0, 255, 0), -1)
+
+            for pt in image_points_outer_rear_wheel.reshape(-1, 2).astype(int):
+                pt_shifted = tuple(pt)
+                cv2.circle(frame, pt_shifted, 2, (0, 0, 255), -1)
+
+            cv2.imshow('Points Visualization', frame)
+            
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+
 
     # Release the video capture object and close all windows
     cap.release()
