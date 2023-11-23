@@ -18,6 +18,4 @@ trajectory_points_3d, trajectory_inner_rear_wheel_3d, trajectory_outer_rear_whee
 
 image_points, image_points_inner_rear_wheel, image_points_outer_rear_wheel = project_3d_to_2d(trajectory_points_3d, trajectory_inner_rear_wheel_3d, trajectory_outer_rear_wheel_3d, rotation_vector, translation_vector, camera_matrix, dist)
 
-# visualize_trajectories(video_path, camera_matrix, dist, image_points, image_points_inner_rear_wheel, image_points_outer_rear_wheel)
-
-# visualize_trajectories_real_time(video_path, camera_matrix, dist, image_points, image_points_inner_rear_wheel, image_points_outer_rear_wheel, steering_angle_array)
+visualize_trajectories(video_path, camera_matrix, dist, image_points, image_points_inner_rear_wheel, image_points_outer_rear_wheel)
