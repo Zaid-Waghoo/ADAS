@@ -6,7 +6,7 @@ track_width = 1.59  # Track width in meters
 steering_ratio = 14.3  # Steering ratio
 
 # Steering angle parameters
-steering_angle = 0 # Steering angle in degrees
+steering_angle = 90 # Steering angle in degrees
 
 # Simulation parameters
 time_step = 0.1  # Time interval for simulation
