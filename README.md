@@ -10,13 +10,19 @@ This project is designed for Advanced Driver Assistance Systems (ADAS) and focus
 ## Requirements
 Make sure you have the following installed:
 - Python 3.x
-- OpenCV (`pip install opencv-python`)
+- OpenCV (`pip install opencv-contrib-python`)
 - NumPy (`pip install numpy`)
 - Matplotlib (`pip install matplotlib`)
 
 ## Project Structure
 - `Variables.py`: Contains project-specific variables.
+    - Adjust vehicle-specific values such as wheelbase, track width, and steering ratio in this file.
+    - Modify the steering angle for visualization within `SteeringTrajectory.py`.
+    - Update simulation parameters like vehicle speed for trajectory generation.
+    - Adjust camera intrinsic and extrinsic parameters to customize the imaging setup.
+
 - `Functions.py`: Includes functions for calculating wheel angles, trajectories, and visualization.
+
 - `SteeringTrajectory.py`: The code snippet performs a trajectory visualization using predefined parameters and functions for calculating vehicle trajectories and visualizing them. The process involves the following steps:
 1. **Calculate The Ackermann Angle:**
     - Compute the Ackermann steering angle based on predefined values for wheelbase, steering angle, and steering ratio.
@@ -54,4 +60,5 @@ cd adas-project
 
 pip install -r requirements.txt
 
+python ReversingTrajectoryInteractive.py
 python SteeringTrajectory.py

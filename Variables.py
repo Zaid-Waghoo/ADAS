@@ -4,9 +4,11 @@ import numpy as np
 wheelbase = 2.69  # Wheelbase length in meters
 track_width = 1.59  # Track width in meters
 steering_ratio = 14.3  # Steering ratio
+
+# Steering angle parameters
 steering_angle = 0 # Steering angle in degrees
-steering_angle_array = np.linspace(-360, 360, 10)  # Array of steering angles
-ackermann_percentage = 60  # Percentage of ackermann angle
+
+# Simulation parameters
 time_step = 0.1  # Time interval for simulation
 total_time = 5  # Total simulation time
 speed = 1  # Speed in meters per second
