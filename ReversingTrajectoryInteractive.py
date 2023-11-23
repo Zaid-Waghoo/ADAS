@@ -15,7 +15,7 @@ cap = cv2.VideoCapture('ReversingCamera.mp4')
 cv2.namedWindow('Trajectory Visualization')
 
 # Create a trackbar for steering angle control
-cv2.createTrackbar('Steering', 'Trajectory Visualization', 360, 720, update_steering_angle)  # Adjust range to 720
+cv2.createTrackbar('Steering', 'Trajectory Visualization', 360, 720, update_steering_angle)  
 
 steering_angle = 0  # Initial steering angle value
 

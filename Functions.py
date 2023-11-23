@@ -57,7 +57,6 @@ def plot_wheel_trajectories(x_values_center, y_values_center, x_values_inner_rea
     plt.plot(x_values_inner_rear, y_values_inner_rear, label='Right Wheel Trajectory')
     plt.plot(x_values_outer_rear, y_values_outer_rear, label='Left Wheel Trajectory')
 
-
     # Add labels and legend
     plt.title('Vehicle Trajectory based on Ackermann Steering Model')
     plt.xlabel('X Coordinate (meters)')
