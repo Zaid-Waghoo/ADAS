@@ -55,8 +55,7 @@ Make sure you have the following installed:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/adas-project.git
-cd adas-project
+git clone https://github.com/Zaid-Waghoo/ADAS.git
 
 pip install -r requirements.txt
 
