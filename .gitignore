@@ -2,6 +2,10 @@
 __pycache__/
 *.py[cod]
 *$py.class
+ObjectDetection/datasets
+ObjectDetection/SavedModels
+ObjectDetection/YOLOModel
+runs
 
 # C extensions
 *.so
